@@ -8,10 +8,26 @@ This method shows all registered users.
 
 Return:
 
-    200: Content found
-    404: File not found 
-    500: Internal server error 
+    200: content found
+    400: bad request
+    401: unauthorized 
+    403: forbidden
+    500: internal server error 
     
+    
+_________________________________________________________________________
+### Fetch information about reviewers.
+
+This method shows all reviewers.
+
+**GET <base_url>/reviewers/**
+
+Return:
+
+    200: Content found
+    400: bad request
+    404: file not found 
+    500: internal server error 
 _________________________________________________________________________
 
 ### Fetch information about requests.
@@ -23,8 +39,9 @@ This method shows all requests.
 Return:
 
     200: Content found
-    404: File not found 
-    500: Internal server error 
+    400: bad request
+    404: file not found 
+    500: internal server error 
     
 __________________________________________________________________________
 
@@ -37,10 +54,31 @@ This method shows single request .
 Return
 
 
-    200: Content found
-    404: File not found 
-    500: Internal server error 
+    200: сontent found
+    400: bad request
+    404: file not found 
+    500: internal server error  
     
+__________________________________________________________________________
+### User registration
+
+**POST <base_url>/registration**
+
+The payload MUST contain the following json properties:
+
+ *name*: username ,
+
+ *email*: your work email , 
+
+ *password*: your account password , 
+
+
+Return:
+
+    201: + the request: Created
+    400: bad request
+
+
 __________________________________________________________________________
 
 ### Generate a request
@@ -60,12 +98,12 @@ The payload MUST contain the following json properties:
 
 *description*: information about the bonus,
 
- *status*: Each request should have a one of these statuses - “created”, “approved”,“rejected”, “done”
 
 Return:
 
     201 + the request: Created
     404 Content not found
+    401: unauthorized 
 __________________________________________________________________________
 
 ### Add role
@@ -84,8 +122,9 @@ The payload MUST contain the following json properties:
 
 Return:
 
-    201 + the user: Created
-    404 Content not found
+     201: + the user: Created
+     400: bad request
+     403: forbidden
 
 
 __________________________________________________________________________
@@ -123,8 +162,21 @@ The admin can choose single user to remove Reviewer role.
 Return:
 
     200: content found 
-    204: no content
+    204: no content 
+    400: bad request
+    403: forbidden
     404: not found (File not found) 
 
-
 __________________________________________________________________________
+### Remove request
+The user can delete the selected request
+
+**DELETE <base_url>/request/<request_id>**
+
+Return:
+
+    200: content found
+    204: no content
+    400: bad request
+    403: forbidden
+    404: not found (File not found) 
