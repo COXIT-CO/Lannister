@@ -75,7 +75,7 @@ The payload MUST contain the following json properties:
 
 Return:
 
-    201: + the request: Created
+    201: created
     400: bad request
 
 
@@ -101,8 +101,8 @@ The payload MUST contain the following json properties:
 
 Return:
 
-    201 + the request: Created
-    404 Content not found
+    201: created
+    404: content not found
     401: unauthorized 
 __________________________________________________________________________
 
@@ -116,13 +116,13 @@ The payload MUST contain the following json properties:
 
 *name*: the username
 
-*email*:the user email
+*email*: the user email
 
 *roles*: role in the company
 
 Return:
 
-     201: + the user: Created
+     201: created
      400: bad request
      403: forbidden
 
