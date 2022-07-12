@@ -9,9 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import os
+
 from pathlib import Path
-from dotenv import load_dotenv, find_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,10 +18,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-load_dotenv(find_dotenv())
 
-SECRET_KEY = os.environ['SECRET_KEY']
-
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-g(-86&a8c69*e^0wu^p#vw$1g68svrhjzlfi(33s1vw(_(%@1q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,11 +76,11 @@ WSGI_APPLICATION = 'LannisterProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'postgresql',
-        # 'USER': 'postgresql',
-        # 'PASSWORD': 'postgresql',
-        # 'HOST': 'lannister_db',
-        # 'PORT': 5432,
+        'NAME': 'postgresql',
+        'USER': 'postgresql',
+        'PASSWORD': 'postgresql',
+        'HOST': 'lannister_db',
+        'PORT': 5432,
     }
 }
 

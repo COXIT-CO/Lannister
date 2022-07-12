@@ -1,0 +1,24 @@
+version: "3.8"
+   
+services:
+  lannister_db:
+    image: postgres:14
+    container_name: lannister_db
+    hostname: localhost
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - .:/docker-entrypoint-initdb.d
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - lannister_db
+
