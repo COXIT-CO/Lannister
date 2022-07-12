@@ -181,6 +181,22 @@
     </table>
 </details>
 
+
+<details id="request_status">
+    <summary><b>request_status</b></summary>
+    <table>
+        <tr><th>Status</th></tr>
+        <tr><td>created</td></tr>
+        <tr><td>approved</td></tr>
+        <tr><td>rejected</td></tr>
+        <tr><td>done</td></tr>
+    </table>
+</details>
+
+<hr/>
+
+
+
 ### Database diagram
 
 <div style="float: footnote;"><img src="https://i.ibb.co/X2rW2z3/Lannister-rightversion.png"/></div>
@@ -367,17 +383,3 @@ Return:
     400: bad request
     403: forbidden
     404: not found (File not found) 
-
-<details id="request_status">
-    <summary><b>request_status</b></summary>
-    <table>
-        <tr><th>Status</th></tr>
-        <tr><td>created</td></tr>
-        <tr><td>approved</td></tr>
-        <tr><td>rejected</td></tr>
-        <tr><td>done</td></tr>
-    </table>
-</details>
-
-<hr/>
-
