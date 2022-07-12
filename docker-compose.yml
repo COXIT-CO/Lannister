@@ -1,16 +1,11 @@
-
-version: "3.8"
-
+version: '3.8'
 services:
   lannister_db:
     image: postgres:14
     container_name: lannister_db
     hostname: localhost
-  web:
-    build: ./Lannister/api_src
-    command: python manage.py runserver 0.0.0.0:8000
     ports:
-      - "5432:5432"
+      - "5432"
     restart: always
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -20,4 +15,10 @@ services:
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
       - .:/var/lib/postgresql/data
+  web:
+    build: ./Lannister/api_src
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
       - "8000:8000"
+    depends_on:
+      - lannister_db
