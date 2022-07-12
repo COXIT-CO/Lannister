@@ -1,7 +1,7 @@
 FROM python:3
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-WORKDIR /code
-COPY requirements.txt /code/
+WORKDIR /api_src
+COPY requirements.txt /api_src/
 RUN pip install -r requirements.txt
-COPY . /code/
+COPY .. /api_src/
