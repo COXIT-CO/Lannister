@@ -32,7 +32,7 @@ media
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 .idea/
-
+.idea/**.iml
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
