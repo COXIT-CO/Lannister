@@ -15,3 +15,10 @@ services:
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
       - .:/var/lib/postgresql/data
+  web:
+    build: ./Lannister/api_src
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - lannister_db
