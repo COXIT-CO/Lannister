@@ -30,7 +30,7 @@ def get_reviewer_requests(user_id):
             "description": "some additional information",
             "creator": "some_user_id",
             "status": "created"
-        }
+        },
     ]
     return requests_json
 
@@ -44,7 +44,7 @@ def get_users():
             "name": "some name",
             "email": "some@user.email",
             "roles": ['worker', 'reviewer']
-        }
+        },
     ]
     return users_json
 
@@ -52,7 +52,7 @@ def get_users():
 # a function for admin to show list of all requests.
 def get_requests():
     # this is fake request list
-    requests_list = [
+    request_list = [
         {
             "request_id": "some_request_id",
             "bonus_type": "some bonus",
@@ -60,6 +60,6 @@ def get_requests():
             "creator": "some_user_id",
             "reviewer": "some_user_id",
             "status": "created"
-        }
+        },
     ]
-    return requests_list
+    return request_list

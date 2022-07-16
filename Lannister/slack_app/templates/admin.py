@@ -13,7 +13,6 @@ ADMIN_USER = [
             "text": {
                 "type": "plain_text",
                 "text": "Edit roles",
-                "emoji": True
             },
             "value": "user_id"
         }
@@ -37,7 +36,7 @@ ADMIN_REQUEST = [
             "text": {
                 "type": "plain_text",
                 "text": "History",
-                "emoji": True
+
             },
             "value": "request_id"
         }
@@ -51,7 +50,6 @@ ADMIN = [
         "text": {
             "type": "plain_text",
             "text": "Admin Space",
-            "emoji": True
         }
     },
     {
@@ -74,4 +72,30 @@ ADMIN = [
     {
         "type": "divider"
     },       
+]
+
+
+# an admin template to add/remove reviewer role.
+EDIT_ROLES = [
+	{
+		"type": "input",
+        "block_id": "edit_roles",
+		"element": {
+			"type": "checkboxes",
+			"options": [
+				{
+					"text": {
+						"type": "plain_text",
+						"text": "Reviewer",
+					},
+					"value": "reviewer_role"
+				}
+			],
+			"action_id": "set_reviewer_role"
+		},
+		"label": {
+			"type": "plain_text",
+			"text": "Do you want to grant this user with reviewer rights?",
+		}
+	}
 ]

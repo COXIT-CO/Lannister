@@ -13,7 +13,6 @@ REVIEWER_REQUEST = [
             "text": {
                 "type": "plain_text",
                 "text": "Review",
-                "emoji": True
             },
             "value": "request_id"
         }
@@ -28,7 +27,6 @@ REVIEWER = [
         "text": {
             "type": "plain_text",
             "text": "Reviewer Space",
-            "emoji": True
         }
     },
     {
@@ -37,5 +35,8 @@ REVIEWER = [
             "type": "mrkdwn",
             "text": "*Requests assigned to You*"
         }
+    },
+    {
+        "type": "divider"
     },
 ]
