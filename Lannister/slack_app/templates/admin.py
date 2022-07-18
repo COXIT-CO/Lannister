@@ -79,6 +79,7 @@ ADMIN = [
 EDIT_ROLES = [
 	{
 		"type": "input",
+        "optional": True,
         "block_id": "edit_roles",
 		"element": {
 			"type": "checkboxes",
@@ -91,7 +92,7 @@ EDIT_ROLES = [
 					"value": "reviewer_role"
 				}
 			],
-			"action_id": "set_reviewer_role"
+			"action_id": "set_reviewer_role",
 		},
 		"label": {
 			"type": "plain_text",

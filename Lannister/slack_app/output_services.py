@@ -63,3 +63,21 @@ def get_requests():
         },
     ]
     return request_list
+
+
+# a function for admin to get request history
+def get_request_history(request_id):
+    # this is fake request history
+    request_history = {
+        "date_creation": "01/06/2022",
+        "date_approval": "02/06/2022",
+        "date_rejection": None,
+        "date_done": "03/06/2022",
+    }
+    return request_history
+
+
+def get_user_roles(user_id):
+    # this is fake response
+    user_roles = ['worker', 'reviewer', 'admin']
+    return user_roles

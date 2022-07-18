@@ -11,7 +11,7 @@ WORKER_REQUEST_MODAL = [
 		"type": "input",
 		"element": {
 			"type": "plain_text_input",
-			"action_id": "plain_text_input-action"
+			"action_id": "bonus_input_action"
 		},
 		"block_id": "bonus_input",
 		"label": {
@@ -23,6 +23,7 @@ WORKER_REQUEST_MODAL = [
 		"type": "input",
 		"element": {
 			"type": "plain_text_input",
+			"action_id": "description_input_action"
 		},
 		"block_id": "description_input",
 		"label": {
