@@ -10,10 +10,10 @@ def get_worker_requests(user_id):
     # this is fake request list
     requests_json = [
         {
-            "request_id": "some_request_id",
+            "request_id": "requestid",
             "bonus_type": "some bonus",
             "description": "some additional information",
-            "reviewer": "some_user_id",
+            "reviewer": "userid",
             "status": "created"
         },
     ]
@@ -25,10 +25,10 @@ def get_reviewer_requests(user_id):
     # this is fake request list
     requests_json = [
         {
-            "request_id": "some_request_id",
+            "request_id": "requestid",
             "bonus_type": "some bonus",
             "description": "some additional information",
-            "creator": "some_user_id",
+            "creator": "userid",
             "status": "created"
         },
     ]
@@ -40,7 +40,7 @@ def get_users():
     # this is fake user list
     users_json = [
         {
-            "user_id": "some_user_id",
+            "user_id": "userid",
             "name": "some name",
             "email": "some@user.email",
             "roles": ['worker', 'reviewer']
@@ -54,11 +54,11 @@ def get_requests():
     # this is fake request list
     request_list = [
         {
-            "request_id": "some_request_id",
+            "request_id": "requestid",
             "bonus_type": "some bonus",
             "description": "some additional information",
-            "creator": "some_user_id",
-            "reviewer": "some_user_id",
+            "creator": "userid",
+            "reviewer": "userid",
             "status": "created"
         },
     ]

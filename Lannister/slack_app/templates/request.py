@@ -13,7 +13,7 @@ WORKER_REQUEST_MODAL = [
 			"type": "plain_text_input",
 			"action_id": "bonus_input_action"
 		},
-		"block_id": "bonus_input",
+		"block_id": "bonus_input_id",
 		"label": {
 			"type": "plain_text",
 			"text": "Bonus type",
@@ -25,12 +25,12 @@ WORKER_REQUEST_MODAL = [
 			"type": "plain_text_input",
 			"action_id": "description_input_action"
 		},
-		"block_id": "description_input",
+		"block_id": "description_input_id",
 		"label": {
 			"type": "plain_text",
 			"text": "Description",
 		}
-	}
+	},
 ]
 
 
@@ -59,28 +59,14 @@ REVIEWER_REQUEST_MODAL = [
 	},
 	{
 		"type": "input",
-		"block_id": "status_select",
+		"block_id": "status_select_id",
 		"element": {
 			"type": "static_select",
 			"placeholder": {
 				"type": "plain_text",
 				"text": "Set status",
 			},
-			"initial_option": {
-				"text": {
-					"type": "plain_text",
-					"text": "Created",
-				},
-				"value": "created"
-			},
 			"options": [
-				{
-					"text": {
-						"type": "plain_text",
-						"text": "Created",
-					},
-					"value": "created"
-				},
 				{
 					"text": {
 						"type": "plain_text",
@@ -109,7 +95,7 @@ REVIEWER_REQUEST_MODAL = [
 			"type": "plain_text",
 			"text": "Status",
 		}
-	}
+	},
 ]
 
 
@@ -121,5 +107,5 @@ ADMIN_REQUEST_MODAL = [
 			"text": "*Creation date:* some_date\n*Approval date:* some_date\n" \
 				"*Rejection date:* some_date\n*Done date:* some_data"
 		}
-	}
+	},
 ]

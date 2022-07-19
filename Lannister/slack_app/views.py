@@ -59,8 +59,9 @@ def reviewer_requests(user_id):
                 " {}\n*Description:* {}\n*Status:* {}".format\
                 (i["bonus_type"], i["creator"], i["description"], i["status"])
 
-            item["accessory"]["value"] = "{}, {}, {}".format\
-                (i["creator"], i["bonus_type"], i["description"])
+            item["accessory"]["value"] = "{}, {}, {}, {}".format\
+                (i["request_id"], i["creator"],\
+                     i["bonus_type"], i["description"])
             item["block_id"] = "R{}".format(i["request_id"])
             request_list.append(item)
     
@@ -93,8 +94,8 @@ def admin_users():
         item["text"]["text"] = "*Name:* {}\n*Email:* " \
             "{}\n*Roles: *{}".format(i["name"], i["email"], i["roles"])
 
-        item["accessory"]["value"] = "{}, {}, {}".format\
-            (i["name"], i["email"], i["roles"])
+        item["accessory"]["value"] = "{}, {}, {}, {}".format\
+            (i["user_id"], i["name"], i["email"], i["roles"])
         item["block_id"] = i["user_id"]
         user_list.append(item)
 
@@ -165,12 +166,15 @@ def edit_request_modal(request):
     json_view = WORKER_REQUEST_MODAL
 
     request_parsed = request.split(', ')
-    json_view[1]["element"]["initial_value"] = request_parsed[1]
+    json_view[1]["element"]["initial_value"] = request_parsed[2]
 
     request_description = ""
     for i in range(3, len(request_parsed)):
         request_description = ', '.join([request_description, request_parsed[i]])
     json_view[2]["element"]["initial_value"] = request_description[2:]
+
+    json_view[1]["block_id"] = f"bonus_input_{request_parsed[0]}"
+    json_view[2]["block_id"] = f"description_input_{request_parsed[0]}"
 
     template = {
         "type": "modal",
@@ -194,11 +198,13 @@ def review_request_modal(request):
 
     request_parsed = request.split(', ')
     json_view[1]["text"]["text"] = "*Creator:* {}\n*Bonus type:* {}\n" \
-        "*Description:*".format(request_parsed[0], request_parsed[1])
+        "*Description:*".format(request_parsed[1], request_parsed[2])
     request_description = ""
-    for i in range(2, len(request_parsed)):
+    for i in range(3, len(request_parsed)):
         request_description = ', '.join([request_description, request_parsed[i]])
     json_view[2]["text"]["text"] = request_description[2:]
+
+    json_view[3]["block_id"] = f"status_select_{request_parsed[0]}"
 
     template = {
         "type": "modal",
@@ -221,7 +227,7 @@ def review_request_modal(request):
 def edit_roles_modal(user):
     json_view = EDIT_ROLES
 
-    if 'worker' in user:
+    if 'reviewer' in user:
         json_view[0]["element"]["initial_options"] = [
             {
 				"text": {
@@ -231,6 +237,8 @@ def edit_roles_modal(user):
 				"value": "reviewer_role"
 			}
         ]
+
+    json_view[0]["block_id"] = f"edit_roles_{user.split(', ')[0]}"
 
     template = {
         "type": "modal",
@@ -266,13 +274,9 @@ def show_history_modal(request):
         "type": "modal",
         "callback_id": "show_history_view",
         "title": {"type": "plain_text", "text": "Request History"},
-        "submit": {
-	        "type": "plain_text",
-	        "text": "Submit",
-	    },
         "close": {
             "type": "plain_text",
-            "text": "Cancel",
+            "text": "Close",
         },
         "blocks": json_view,
     }
