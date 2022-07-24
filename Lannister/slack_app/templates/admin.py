@@ -2,7 +2,6 @@
 ADMIN_USER = [
     {
         "type": "section",
-        "block_id": "user_id",
         "text": {
             "type": "mrkdwn",
             "text": "*Name: * some name\n*Email: * some email" \
@@ -25,7 +24,6 @@ ADMIN_USER = [
 ADMIN_REQUEST = [
     {
         "type": "section",
-        "block_id": "admin_request_id",
         "text": {
             "type": "mrkdwn",
             "text": "*Bonus type:* some bonus\n*Creator:* some user" \

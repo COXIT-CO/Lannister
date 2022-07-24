@@ -2,7 +2,6 @@
 WORKER_REQUEST = [
     {
         "type": "section",
-        "block_id": "request_id",
         "text": {
             "type": "mrkdwn",
             "text": "*Bonus type:* some bonus\n*Reviewer:* some user\n" \
@@ -23,36 +22,36 @@ WORKER_REQUEST = [
 
 # worker space template
 WORKER = [
-        {
-            "type": "header",
-            "text": {
-                "type": "plain_text",
-                "text": "Worker Space"
+    {
+        "type": "header",
+        "text": {
+            "type": "plain_text",
+            "text": "Worker Space"
+        }
+    },
+    {
+        "type": "actions",
+        "elements": [
+            {
+                "type": "button",
+                "action_id": "create_request",
+                "text": {
+                    "type": "plain_text",
+                    "text": "Create New Request",
+                },
+                "style": "primary",
+                "value": "create_request"
             }
-        },
-        {
-            "type": "actions",
-            "elements": [
-                {
-                    "type": "button",
-                    "action_id": "create_request",
-                    "text": {
-                        "type": "plain_text",
-                        "text": "Create New Request",
-                    },
-                    "style": "primary",
-                    "value": "create_request"
-                }
-            ]
-        },
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*Your Requests*"
-            }
-        },
-        {
-            "type": "divider"
-        },
-    ]
+        ]
+    },
+    {
+         "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": "*Your Requests*"
+        }
+    },
+    {
+        "type": "divider"
+    },
+]

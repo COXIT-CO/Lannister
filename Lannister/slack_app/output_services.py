@@ -1,11 +1,13 @@
 '''
 This file is just a part of app skeleton. It contains functions with dummy API information.
-In fact, you should use it as a connection to real API by importing real functions and replacing these ones.
+In fact, you should use it as a connection to real API
+by importing real functions and replacing these ones.
 Do not forget to delete this when you are done :)
 '''
 
 
-# processes a query to get all requests by user_id(creator). returns requests as a list of json objects.
+# processes a request to get all requests by user_id(creator).
+# returns requests as a list of json objects.
 def get_worker_requests(user_id):
     # this is fake request list
     requests_json = [
@@ -13,14 +15,15 @@ def get_worker_requests(user_id):
             "request_id": "requestid",
             "bonus_type": "some bonus",
             "description": "some additional information",
-            "reviewer": "userid",
+            "reviewer": "U03MU1FH0R0",
             "status": "created"
         },
     ]
     return requests_json
 
 
-# same as get_worker_requests() but uses user_id as an id of a reviewer.
+# processes a request to get all requests by user_id(reviewer).
+# returns requests as a list of json objects.
 def get_reviewer_requests(user_id):
     # this is fake request list
     requests_json = [
@@ -28,7 +31,7 @@ def get_reviewer_requests(user_id):
             "request_id": "requestid",
             "bonus_type": "some bonus",
             "description": "some additional information",
-            "creator": "userid",
+            "creator": "U03MU1FH0R0",
             "status": "created"
         },
     ]
@@ -40,7 +43,7 @@ def get_users():
     # this is fake user list
     users_json = [
         {
-            "user_id": "userid",
+            "user_id": "U03MU1FH0R0",
             "name": "some name",
             "email": "some@user.email",
             "roles": ['worker', 'reviewer']
@@ -57,8 +60,8 @@ def get_requests():
             "request_id": "requestid",
             "bonus_type": "some bonus",
             "description": "some additional information",
-            "creator": "userid",
-            "reviewer": "userid",
+            "creator": "U03MU1FH0R0",
+            "reviewer": "U03MU1FH0R0",
             "status": "created"
         },
     ]
@@ -77,7 +80,15 @@ def get_request_history(request_id):
     return request_history
 
 
+# a function to get user roles in order to render corresponding space
 def get_user_roles(user_id):
     # this is fake response
     user_roles = ['worker', 'reviewer', 'admin']
     return user_roles
+
+
+# a function to get creator id to notify him about his request review.
+def get_request_creator(request_id):
+    # this is fake request creator
+    request_creator = 'U03MU1FH0R0'
+    return request_creator

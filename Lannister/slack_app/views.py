@@ -24,7 +24,6 @@ def worker_requests(user_id):
             i["bonus_type"],
             i["reviewer"],
             i["description"])
-        item["block_id"] = "W{}".format(i["request_id"])
         request_list.append(item)
 
     return request_list
@@ -34,7 +33,10 @@ def worker_requests(user_id):
 # returns a slack template as a json.
 def worker_space(user_id):
     if 'worker' in get_user_roles(user_id):
-        template = WORKER
+        template = []
+        for i in WORKER:
+            template.append(i)
+
         requests = worker_requests(user_id)
 
         for i in requests:
@@ -43,7 +45,7 @@ def worker_space(user_id):
 
         return template
     else:
-        return {}
+        return []
 
 
 
@@ -62,7 +64,6 @@ def reviewer_requests(user_id):
             item["accessory"]["value"] = "{}, {}, {}, {}".format\
                 (i["request_id"], i["creator"],\
                      i["bonus_type"], i["description"])
-            item["block_id"] = "R{}".format(i["request_id"])
             request_list.append(item)
     
     return request_list
@@ -71,7 +72,9 @@ def reviewer_requests(user_id):
 # same as worker space but for reviewer.
 def reviewer_space(user_id):
     if 'reviewer' in get_user_roles(user_id):
-        template = REVIEWER
+        template = []
+        for i in REVIEWER:
+            template.append(i)
         requests = reviewer_requests(user_id)
 
         for i in requests:
@@ -80,7 +83,7 @@ def reviewer_space(user_id):
 
         return template
     else:
-        return {}
+        return []
 
 
 # forms a list of users as json objects.
@@ -96,7 +99,6 @@ def admin_users():
 
         item["accessory"]["value"] = "{}, {}, {}, {}".format\
             (i["user_id"], i["name"], i["email"], i["roles"])
-        item["block_id"] = i["user_id"]
         user_list.append(item)
 
     return user_list
@@ -116,7 +118,6 @@ def admin_requests():
                      i["description"], i["status"])
 
         item["accessory"]["value"] = i["request_id"]
-        item["block_id"] = "A{}".format(i["request_id"])
         request_list.append(item)
 
     return request_list
@@ -125,7 +126,10 @@ def admin_requests():
 # same as worker space but for admin.
 def admin_space(user_id):
     if 'admin' in get_user_roles(user_id):
-        template = ADMIN
+        template = []
+        for i in ADMIN:
+            template.append(i)
+
         users = admin_users()
         requests = admin_requests()
 
@@ -139,9 +143,10 @@ def admin_space(user_id):
 
         return template
     else:
-        return {}
+        return []
 
 
+# a modal with form to fill in order to create a request.
 def create_request_modal():
     json_view = WORKER_REQUEST_MODAL
     template = {
@@ -162,11 +167,12 @@ def create_request_modal():
     return template
 
 
+# a modal with pre-filled form to edit in order to edit a request.
 def edit_request_modal(request):
     json_view = WORKER_REQUEST_MODAL
 
     request_parsed = request.split(', ')
-    json_view[1]["element"]["initial_value"] = request_parsed[2]
+    json_view[1]["element"]["initial_value"] = request_parsed[1]
 
     request_description = ""
     for i in range(3, len(request_parsed)):
@@ -193,6 +199,8 @@ def edit_request_modal(request):
 
     return template
 
+
+# a modal with a form to review a request.
 def review_request_modal(request):
     json_view = REVIEWER_REQUEST_MODAL
 
@@ -224,6 +232,7 @@ def review_request_modal(request):
     return template
 
 
+# a modal with a button to add/remove reviewer role.
 def edit_roles_modal(user):
     json_view = EDIT_ROLES
 
@@ -258,6 +267,7 @@ def edit_roles_modal(user):
     return template
 
 
+# a modal with request history.
 def show_history_modal(request):
     json_view = ADMIN_REQUEST_MODAL
 

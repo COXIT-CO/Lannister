@@ -99,6 +99,7 @@ REVIEWER_REQUEST_MODAL = [
 ]
 
 
+# a request template that is shown to admin to see request history.
 ADMIN_REQUEST_MODAL = [
 	{
 		"type": "section",
