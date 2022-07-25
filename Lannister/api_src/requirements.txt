@@ -1,0 +1,5 @@
+Django>=3.0,<4.0
+psycopg2>=2.8
+python-dotenv
+pytest==7.1.2
+loguru==0.6.0
