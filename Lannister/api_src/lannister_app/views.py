@@ -12,15 +12,14 @@ def register(request):
     """Registers user to the server. Input should be in the format:
     {"username":"name",
     "email":"email@domain.com",
-    "roles":"["role1","role2"]",
-    "password": "password"}я
+    "password": "password"}
     """
 
     serializer = CreateUserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         success = {
-            "message": f"Successfully registered user: [{request.data['username']}]"
+            "message": f"Successfully registered user:" f" [{request.data['username']}]"
         }
         return Response(success)
     return Response(serializer.errors, status=400)
