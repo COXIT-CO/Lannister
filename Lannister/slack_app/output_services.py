@@ -92,3 +92,10 @@ def get_request_creator(request_id):
     # this is fake request creator
     request_creator = 'U03MU1FH0R0'
     return request_creator
+
+
+# a function to check if user exists. 
+# sends request to fetch user data to find out if he exists.
+def check_user(user_id):
+    # this is fake response
+    return True

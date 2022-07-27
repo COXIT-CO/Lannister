@@ -37,3 +37,9 @@ def review_request(request):
 def edit_roles(user):
     # here must be a PUT request to a corresponding API endpoint
     pass
+
+
+# add new user
+def register(user):
+    # here must be a POST request to a corresponding API endpoint
+    pass
