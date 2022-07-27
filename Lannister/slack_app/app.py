@@ -3,8 +3,9 @@ import os
 from slack_bolt import App
 
 import views
-from input_services import create_request, edit_request, review_request, edit_roles
-from output_services import get_request_creator
+from input_services import create_request, edit_request, review_request,\
+     edit_roles, register
+from output_services import get_request_creator, check_user
 
 
 # Initializes your app with your bot token and signing secret
@@ -15,27 +16,44 @@ app = App(
 
 
 # Home tab
-@app.event("app_home_opened") #! problem here
+@app.event("app_home_opened")
 def publish_home_tab(client, event, logger):
     try:
         user_id = event["user"]
-        
-        json_view = []
-        json_view = views.worker_space(user_id)
-        for i in views.reviewer_space(user_id):
-            json_view.append(i)
-        for i in views.admin_space(user_id):
-            json_view.append(i)
+
+        if check_user(user_id):
+            json_view = []
+            json_view = views.worker_space(user_id)
+            for i in views.reviewer_space(user_id):
+                json_view.append(i)
+            for i in views.admin_space(user_id):
+                json_view.append(i)
+        else:
+            json_view = views.unregistered_view()
 
         client.views_publish(
-            user_id=user_id,
-            view={
-                "type": "home",
-                "blocks": json_view,
-            },
-        )
+                user_id=user_id,
+                view={
+                    "type": "home",
+                    "blocks": json_view,
+                },
+            )
+
     except Exception as e:
         logger.error(f"Error publishing home tab: {e}")
+
+
+# a listener of a "register" action. triggered by Sign Up button.
+@app.action("register")
+def render_register_modal(ack, body, client, logger):
+    try:
+        ack()
+        client.views_open(
+            trigger_id=body["trigger_id"],
+            view = views.register_modal()
+        )
+    except Exception as e:
+        logger.error(f"Error while opening modal: {e}")
 
 
 # a listener of a "create_request" action. triggered by Create Request button.
@@ -196,6 +214,33 @@ def edit_roles_submission(ack, body, say, logger):
         say("Your role has been changed.",
          channel=user_id)
         
+    except Exception as e:
+        logger.error(f"Error while submitting data: {e}")
+
+
+# a listener of a "register_view" view submission.
+# triggered by Submit button of register_modal.
+@app.view("register_view")
+def register_submission(ack, body, client, say, logger):
+    try:
+        ack()
+        values_dict = body["view"]["state"]["values"]
+
+        user_info = {
+            "id": body["user"]["id"],
+            "email": client.users_profile_get()["email"],
+            "login": values_dict["login_input"]["login_input_action"]["value"],
+            "password": values_dict["password_input"]\
+                ["password_input_action"]["value"],
+        }
+
+        register(user_info)
+        say("You have successfully registered!", channel=body["user"]["id"])
+
+        registered_event = {
+            "user": body["user"]["id"]
+        }
+        publish_home_tab(client, registered_event, logger)
     except Exception as e:
         logger.error(f"Error while submitting data: {e}")
 

@@ -4,6 +4,7 @@ from templates.worker import WORKER_REQUEST, WORKER
 from templates.reviewer import REVIEWER_REQUEST, REVIEWER
 from templates.admin import ADMIN_REQUEST, ADMIN_USER, ADMIN, EDIT_ROLES
 from templates.request import WORKER_REQUEST_MODAL, REVIEWER_REQUEST_MODAL, ADMIN_REQUEST_MODAL
+from templates.registration import UNREGISTERED, REGISTER_MODAL
 
 
 # a function that uses a worker request template to fill it with real data. 
@@ -287,6 +288,38 @@ def show_history_modal(request):
         "close": {
             "type": "plain_text",
             "text": "Close",
+        },
+        "blocks": json_view,
+    }
+
+    return template
+
+
+# returns a slack template of message for unregistered users as a json.
+def unregistered_view():
+    template = []
+
+    for i in UNREGISTERED:
+        template.append(i)
+
+    return template
+
+
+# a modal with register form.
+def register_modal():
+    json_view = REGISTER_MODAL
+
+    template = {
+        "type": "modal",
+        "callback_id": "register_view",
+        "title": {"type": "plain_text", "text": "Registration"},
+        "submit": {
+	        "type": "plain_text",
+	        "text": "Sign Up",
+	    },
+        "close": {
+            "type": "plain_text",
+            "text": "Cancel",
         },
         "blocks": json_view,
     }
