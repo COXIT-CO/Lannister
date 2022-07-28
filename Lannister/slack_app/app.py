@@ -131,10 +131,8 @@ def render_show_history_modal(ack, body, client, logger):
 def create_request_submission(ack, body, say, logger):
     try:
         ack()
-
         values_dict = body["view"]["state"]["values"]
         request_id = list(values_dict.keys())[0].split("_")[-1]
-
         request_info = {
             "bonus": values_dict[f"bonus_input_{request_id}"]["bonus_input_action"][
                 "value"
@@ -157,10 +155,8 @@ def create_request_submission(ack, body, say, logger):
 def edit_request_submission(ack, body, logger):
     try:
         ack()
-
         values_dict = body["view"]["state"]["values"]
         request_id = list(values_dict.keys())[0].split("_")[-1]
-
         request_info = {
             "request_id": request_id,
             "bonus": values_dict[f"bonus_input_{request_id}"]["bonus_input_action"][
@@ -181,10 +177,8 @@ def edit_request_submission(ack, body, logger):
 def review_request_submission(ack, body, say, logger):
     try:
         ack()
-
         values_dict = body["view"]["state"]["values"]
         request_id = list(values_dict.keys())[0].split("_")[-1]
-
         request_info = {
             "request_id": request_id,
             "status": values_dict[f"status_select_{request_id}"][
@@ -208,7 +202,6 @@ def review_request_submission(ack, body, say, logger):
 def edit_roles_submission(ack, body, say, logger):
     try:
         ack()
-
         values_dict = body["view"]["state"]["values"]
         user_id = list(values_dict.keys())[0].split("_")[-1]
         try:
@@ -238,7 +231,6 @@ def register_submission(ack, body, client, say, logger):
     try:
         ack()
         values_dict = body["view"]["state"]["values"]
-
         user_info = {
             "id": body["user"]["id"],
             "email": client.users_profile_get()["email"],

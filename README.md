@@ -199,8 +199,6 @@
 ### Database diagram
 <div style="float: footnote;"><img src="https://i.imgur.com/rkyMnqb.png"/></div>
 
-
-
 ## API
 <hr/>
 ### Fetch information about all users.
@@ -215,9 +213,8 @@ Return:
     400: bad request
     401: unauthorized 
     403: forbidden
-    500: internal server error 
-    
-    
+    500: internal server error  
+
 <hr/>
 ### Fetch information about reviewers.
 
@@ -233,7 +230,7 @@ Return:
     500: internal server error 
 <hr/>
 
-### Fetch information about requests.
+### Fetch information about requests
 
 This method shows all requests.
 
@@ -245,17 +242,16 @@ Return:
     400: bad request
     404: file not found 
     500: internal server error 
-    
+
 <hr/>
 
-### Fetch information about request.
+### Fetch information about request
 
-This method shows single request .
+This method shows single request.
 
 **GET <base_url>/requests/<request_id>**
 
-Return
-
+Return:
 
     200: сontent found
     400: bad request
@@ -263,17 +259,18 @@ Return
     500: internal server error  
     
 <hr/>
+
 ### User registration
 
 **POST <base_url>/registration**
 
 The payload MUST contain the following json properties:
 
- *name*: username ,
+ *name*: username,
 
- *email*: your work email , 
+ *email*: your work email, 
 
- *password*: your account password , 
+ *password*: your account password, 
 
 
 Return:
@@ -281,11 +278,9 @@ Return:
     201: created
     400: bad request
 
-
 <hr/>
 
 ### Generate a request
-
 
 Worker create new request with info: bonus-type,description, and she/he choose reviewer.
 
@@ -293,7 +288,7 @@ Worker create new request with info: bonus-type,description, and she/he choose r
 
 The payload MUST contain the following json properties:
 
- *creator*: Worker who create the request ,
+ *creator*: Worker who create the request,
 
  *reviewer*: A person who is assigned to review the request, 
 
@@ -329,9 +324,9 @@ Return:
      400: bad request
      403: forbidden
 
-
 <hr/>
-### Edit the selected request.
+
+### Edit the selected request
 
 The worker can change the selected request.
 
@@ -357,6 +352,7 @@ Return:
     500: internal server error (File was copied, but database was not updated)
 
 <hr/>
+
 ### Remove role
 The admin can choose single user to remove Reviewer role.
 
@@ -371,6 +367,7 @@ Return:
     404: not found (File not found) 
 
 <hr/>
+
 ### Remove request
 The user can delete the selected request
 
