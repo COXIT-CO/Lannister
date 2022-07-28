@@ -15,10 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from lannister_app import views
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
-
-from lannister_app import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
