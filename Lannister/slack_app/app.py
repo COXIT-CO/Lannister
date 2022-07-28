@@ -3,8 +3,13 @@ from os import environ
 from slack_bolt import App
 
 import views
-from input_services import (create_request, edit_request, edit_roles, register,
-                            review_request)
+from input_services import (
+    create_request,
+    edit_request,
+    edit_roles,
+    register,
+    review_request,
+)
 from output_services import check_user, get_request_creator
 
 # Initializes your app with your bot token and signing secret
