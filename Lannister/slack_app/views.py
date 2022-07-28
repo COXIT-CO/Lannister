@@ -1,18 +1,10 @@
-from output_services import (
-    get_request_history,
-    get_requests,
-    get_reviewer_requests,
-    get_user_roles,
-    get_users,
-    get_worker_requests,
-)
+from output_services import (get_request_history, get_requests,
+                             get_reviewer_requests, get_user_roles, get_users,
+                             get_worker_requests)
 from templates.admin import ADMIN, ADMIN_REQUEST, ADMIN_USER, EDIT_ROLES
 from templates.registration import REGISTER_MODAL, UNREGISTERED
-from templates.request import (
-    ADMIN_REQUEST_MODAL,
-    REVIEWER_REQUEST_MODAL,
-    WORKER_REQUEST_MODAL,
-)
+from templates.request import (ADMIN_REQUEST_MODAL, REVIEWER_REQUEST_MODAL,
+                               WORKER_REQUEST_MODAL)
 from templates.reviewer import REVIEWER, REVIEWER_REQUEST
 from templates.worker import WORKER, WORKER_REQUEST
 
