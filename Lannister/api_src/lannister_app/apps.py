@@ -6,4 +6,4 @@ class LannisterAppConfig(AppConfig):
     name = "lannister_app"
 
     def ready(self):
-        import lannister_app.signals # noqa
+        import lannister_app.signals  # noqa

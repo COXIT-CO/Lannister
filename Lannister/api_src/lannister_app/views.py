@@ -6,12 +6,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Bonus_request, Bonus_request_history, User
-from .serializers import (
-    BonusRequestHistorySerializer,
-    BonusRequestSerializer,
-    CreateUserSerializer,
-    GetUserSerializer,
-)
+from .serializers import (BonusRequestHistorySerializer,
+                          BonusRequestSerializer, CreateUserSerializer,
+                          GetUserSerializer)
 
 # from django.shortcuts import render
 

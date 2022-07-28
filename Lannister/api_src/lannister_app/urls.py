@@ -1,19 +1,10 @@
 from django.urls import path
 
-from .views import (
-    BonusRequestHistoryList,
-    BonusRequestHistorySingle,
-    BonusRequestList,
-    BonusRequestSingle,
-    ReviewerBonusRequestList,
-    ReviewerList,
-    ReviewerSingle,
-    UserList,
-    UserSingle,
-    WorkerBonusRequestList,
-    WorkerList,
-    WorkerSingle,
-)
+from .views import (BonusRequestHistoryList, BonusRequestHistorySingle,
+                    BonusRequestList, BonusRequestSingle,
+                    ReviewerBonusRequestList, ReviewerList, ReviewerSingle,
+                    UserList, UserSingle, WorkerBonusRequestList, WorkerList,
+                    WorkerSingle)
 
 urlpatterns = [
     path("requests/", BonusRequestList.as_view(), name="bonus_request-list"),
