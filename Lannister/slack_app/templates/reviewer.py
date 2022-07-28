@@ -4,8 +4,8 @@ REVIEWER_REQUEST = [
         "type": "section",
         "text": {
             "type": "mrkdwn",
-            "text": "*Bonus type:* some bonus\n*Creator:* some user" \
-                "\n*Description: * some text\n*Status: * created"
+            "text": "*Bonus type:* some bonus\n*Creator:* some user"
+            "\n*Description: * some text\n*Status: * created",
         },
         "accessory": {
             "type": "button",
@@ -14,8 +14,8 @@ REVIEWER_REQUEST = [
                 "type": "plain_text",
                 "text": "Review",
             },
-            "value": "request_id"
-        }
+            "value": "request_id",
+        },
     },
 ]
 
@@ -27,16 +27,11 @@ REVIEWER = [
         "text": {
             "type": "plain_text",
             "text": "Reviewer Space",
-        }
+        },
     },
     {
         "type": "section",
-        "text": {
-            "type": "mrkdwn",
-            "text": "*Requests assigned to You*"
-        }
+        "text": {"type": "mrkdwn", "text": "*Requests assigned to You*"},
     },
-    {
-        "type": "divider"
-    },
+    {"type": "divider"},
 ]

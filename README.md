@@ -1,5 +1,6 @@
 # Lannister
 ## Database
+<hr/>
 ### Tables
 
 <details id="user" open="true">
@@ -181,8 +182,25 @@
     </table>
 </details>
 
-# API
-_______
+<details id="request_status">
+    <summary><b>request_status</b></summary>
+    <table>
+        <tr><th>Status</th></tr>
+        <tr><td>created</td></tr>
+        <tr><td>approved</td></tr>
+        <tr><td>rejected</td></tr>
+        <tr><td>done</td></tr>
+    </table>
+</details>
+
+<hr/>
+
+
+### Database diagram
+<div style="float: footnote;"><img src="https://i.imgur.com/rkyMnqb.png"/></div>
+
+## API
+<hr/>
 ### Fetch information about all users.
 
 This method shows all registered users.
@@ -195,10 +213,9 @@ Return:
     400: bad request
     401: unauthorized 
     403: forbidden
-    500: internal server error 
-    
-    
-_________________________________________________________________________
+    500: internal server error  
+
+<hr/>
 ### Fetch information about reviewers.
 
 This method shows all reviewers.
@@ -211,9 +228,9 @@ Return:
     400: bad request
     404: file not found 
     500: internal server error 
-_________________________________________________________________________
+<hr/>
 
-### Fetch information about requests.
+### Fetch information about requests
 
 This method shows all requests.
 
@@ -225,35 +242,35 @@ Return:
     400: bad request
     404: file not found 
     500: internal server error 
-    
-__________________________________________________________________________
 
-### Fetch information about request.
+<hr/>
 
-This method shows single request .
+### Fetch information about request
+
+This method shows single request.
 
 **GET <base_url>/requests/<request_id>**
 
-Return
-
+Return:
 
     200: сontent found
     400: bad request
     404: file not found 
     500: internal server error  
-    
-__________________________________________________________________________
+
+<hr/>
+
 ### User registration
 
 **POST <base_url>/registration**
 
 The payload MUST contain the following json properties:
 
- *name*: username ,
+ *name*: username,
 
- *email*: your work email , 
+ *email*: your work email,
 
- *password*: your account password , 
+ *password*: your account password,
 
 
 Return:
@@ -261,11 +278,9 @@ Return:
     201: created
     400: bad request
 
-
-__________________________________________________________________________
+<hr/>
 
 ### Generate a request
-
 
 Worker create new request with info: bonus-type,description, and she/he choose reviewer.
 
@@ -273,11 +288,11 @@ Worker create new request with info: bonus-type,description, and she/he choose r
 
 The payload MUST contain the following json properties:
 
- *creator*: Worker who create the request ,
+ *creator*: Worker who create the request,
 
- *reviewer*: A person who is assigned to review the request, 
+ *reviewer*: A person who is assigned to review the request,
 
- *bonus_type*: It can be a referral bonus, overtime, etc ,
+ *bonus_type*: It can be a referral bonus, overtime, etc,
 
 *description*: information about the bonus,
 
@@ -287,7 +302,7 @@ Return:
     201: created
     404: content not found
     401: unauthorized 
-__________________________________________________________________________
+<hr/>
 
 ### Add role
 
@@ -309,9 +324,9 @@ Return:
      400: bad request
      403: forbidden
 
+<hr/>
 
-__________________________________________________________________________
-### Edit the selected request.
+### Edit the selected request
 
 The worker can change the selected request.
 
@@ -336,7 +351,8 @@ Return:
     404: not found (File not found) 
     500: internal server error (File was copied, but database was not updated)
 
-__________________________________________________________________________
+<hr/>
+
 ### Remove role
 The admin can choose single user to remove Reviewer role.
 
@@ -350,7 +366,8 @@ Return:
     403: forbidden
     404: not found (File not found) 
 
-__________________________________________________________________________
+<hr/>
+
 ### Remove request
 The user can delete the selected request
 
@@ -363,21 +380,3 @@ Return:
     400: bad request
     403: forbidden
     404: not found (File not found) 
-
-<details id="request_status">
-    <summary><b>request_status</b></summary>
-    <table>
-        <tr><th>Status</th></tr>
-        <tr><td>created</td></tr>
-        <tr><td>approved</td></tr>
-        <tr><td>rejected</td></tr>
-        <tr><td>done</td></tr>
-    </table>
-</details>
-
-<hr/>
-
-
-### Database diagram
-<div style="float: footnote;"><img src="https://i.ibb.co/X2rW2z3/Lannister-rightversion.png"/></div>
-

@@ -1,9 +1,9 @@
-'''
+"""
 This file is just a part of app skeleton. It contains functions with dummy API information.
 In fact, you should use it as a connection to real API
 by importing real functions and replacing these ones.
 Do not forget to delete this when you are done :)
-'''
+"""
 
 
 # processes a request to get all requests by user_id(creator).
@@ -16,7 +16,7 @@ def get_worker_requests(user_id):
             "bonus_type": "some bonus",
             "description": "some additional information",
             "reviewer": "U03MU1FH0R0",
-            "status": "created"
+            "status": "created",
         },
     ]
     return requests_json
@@ -32,7 +32,7 @@ def get_reviewer_requests(user_id):
             "bonus_type": "some bonus",
             "description": "some additional information",
             "creator": "U03MU1FH0R0",
-            "status": "created"
+            "status": "created",
         },
     ]
     return requests_json
@@ -46,7 +46,7 @@ def get_users():
             "user_id": "U03MU1FH0R0",
             "name": "some name",
             "email": "some@user.email",
-            "roles": ['worker', 'reviewer']
+            "roles": ["worker", "reviewer"],
         },
     ]
     return users_json
@@ -62,7 +62,7 @@ def get_requests():
             "description": "some additional information",
             "creator": "U03MU1FH0R0",
             "reviewer": "U03MU1FH0R0",
-            "status": "created"
+            "status": "created",
         },
     ]
     return request_list
@@ -83,12 +83,19 @@ def get_request_history(request_id):
 # a function to get user roles in order to render corresponding space
 def get_user_roles(user_id):
     # this is fake response
-    user_roles = ['worker', 'reviewer', 'admin']
+    user_roles = ["worker", "reviewer", "admin"]
     return user_roles
 
 
 # a function to get creator id to notify him about his request review.
 def get_request_creator(request_id):
     # this is fake request creator
-    request_creator = 'U03MU1FH0R0'
+    request_creator = "U03MU1FH0R0"
     return request_creator
+
+
+# a function to check if user exists.
+# sends request to fetch user data to find out if he exists.
+def check_user(user_id):
+    # this is fake response
+    return True
