@@ -1,6 +1,6 @@
 # Lannister
 ## Database
-_________________________________________________________________________
+<hr/>
 ### Tables
 
 <details id="user" open="true">
@@ -202,7 +202,7 @@ _________________________________________________________________________
 
 
 ## API
-_______
+<hr/>
 ### Fetch information about all users.
 
 This method shows all registered users.
@@ -218,7 +218,7 @@ Return:
     500: internal server error 
     
     
-_________________________________________________________________________
+<hr/>
 ### Fetch information about reviewers.
 
 This method shows all reviewers.
@@ -231,7 +231,7 @@ Return:
     400: bad request
     404: file not found 
     500: internal server error 
-_________________________________________________________________________
+<hr/>
 
 ### Fetch information about requests.
 
@@ -246,7 +246,7 @@ Return:
     404: file not found 
     500: internal server error 
     
-__________________________________________________________________________
+<hr/>
 
 ### Fetch information about request.
 
@@ -262,7 +262,7 @@ Return
     404: file not found 
     500: internal server error  
     
-__________________________________________________________________________
+<hr/>
 ### User registration
 
 **POST <base_url>/registration**
@@ -282,7 +282,7 @@ Return:
     400: bad request
 
 
-__________________________________________________________________________
+<hr/>
 
 ### Generate a request
 
@@ -307,7 +307,7 @@ Return:
     201: created
     404: content not found
     401: unauthorized 
-__________________________________________________________________________
+<hr/>
 
 ### Add role
 
@@ -330,7 +330,7 @@ Return:
      403: forbidden
 
 
-__________________________________________________________________________
+<hr/>
 ### Edit the selected request.
 
 The worker can change the selected request.
@@ -356,7 +356,7 @@ Return:
     404: not found (File not found) 
     500: internal server error (File was copied, but database was not updated)
 
-__________________________________________________________________________
+<hr/>
 ### Remove role
 The admin can choose single user to remove Reviewer role.
 
@@ -370,7 +370,7 @@ Return:
     403: forbidden
     404: not found (File not found) 
 
-__________________________________________________________________________
+<hr/>
 ### Remove request
 The user can delete the selected request
 

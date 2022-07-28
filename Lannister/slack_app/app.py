@@ -1,17 +1,22 @@
-import os
+from os import environ
+
 # Use the package we installed
 from slack_bolt import App
 
 import views
-from input_services import create_request, edit_request, review_request,\
-     edit_roles, register
-from output_services import get_request_creator, check_user
-
+from input_services import (
+    create_request,
+    edit_request,
+    edit_roles,
+    register,
+    review_request,
+)
+from output_services import check_user, get_request_creator
 
 # Initializes your app with your bot token and signing secret
 app = App(
-    token=os.getenv("SLACK_BOT_TOKEN"),
-    signing_secret=os.getenv("SLACK_SIGNING_SECRET")
+    token=environ.get("SLACK_BOT_TOKEN"),
+    signing_secret=environ.get("SLACK_SIGNING_SECRET"),
 )
 
 
@@ -22,7 +27,6 @@ def publish_home_tab(client, event, logger):
         user_id = event["user"]
 
         if check_user(user_id):
-            json_view = []
             json_view = views.worker_space(user_id)
             for i in views.reviewer_space(user_id):
                 json_view.append(i)
@@ -32,12 +36,12 @@ def publish_home_tab(client, event, logger):
             json_view = views.unregistered_view()
 
         client.views_publish(
-                user_id=user_id,
-                view={
-                    "type": "home",
-                    "blocks": json_view,
-                },
-            )
+            user_id=user_id,
+            view={
+                "type": "home",
+                "blocks": json_view,
+            },
+        )
 
     except Exception as e:
         logger.error(f"Error publishing home tab: {e}")
@@ -50,7 +54,7 @@ def render_register_modal(ack, body, client, logger):
         ack()
         client.views_open(
             trigger_id=body["trigger_id"],
-            view = views.register_modal()
+            view=views.register_modal(),
         )
     except Exception as e:
         logger.error(f"Error while opening modal: {e}")
@@ -63,7 +67,7 @@ def render_create_request_modal(ack, body, client, logger):
         ack()
         client.views_open(
             trigger_id=body["trigger_id"],
-            view = views.create_request_modal()
+            view=views.create_request_modal(),
         )
     except Exception as e:
         logger.error(f"Error while opening modal: {e}")
@@ -76,7 +80,7 @@ def render_edit_request_modal(ack, body, client, logger):
         ack()
         client.views_open(
             trigger_id=body["trigger_id"],
-            view = views.edit_request_modal(body["actions"][0]["value"])
+            view=views.edit_request_modal(body["actions"][0]["value"]),
         )
     except Exception as e:
         logger.error(f"Error while opening modal: {e}")
@@ -88,8 +92,8 @@ def render_review_request_modal(ack, body, client, logger):
     try:
         ack()
         client.views_open(
-            trigger_id = body["trigger_id"],
-            view = views.review_request_modal(body["actions"][0]["value"])
+            trigger_id=body["trigger_id"],
+            view=views.review_request_modal(body["actions"][0]["value"]),
         )
     except Exception as e:
         logger.error(f"Error while opening modal: {e}")
@@ -101,8 +105,8 @@ def render_edit_roles_modal(ack, body, client, logger):
     try:
         ack()
         client.views_open(
-            trigger_id = body["trigger_id"],
-            view = views.edit_roles_modal(body["actions"][0]["value"])
+            trigger_id=body["trigger_id"],
+            view=views.edit_roles_modal(body["actions"][0]["value"]),
         )
     except Exception as e:
         logger.error(f"Error while opening modal: {e}")
@@ -114,8 +118,8 @@ def render_show_history_modal(ack, body, client, logger):
     try:
         ack()
         client.views_open(
-            trigger_id = body["trigger_id"],
-            view = views.show_history_modal(body["actions"][0]["value"])
+            trigger_id=body["trigger_id"],
+            view=views.show_history_modal(body["actions"][0]["value"]),
         )
     except Exception as e:
         logger.error(f"Error while opening modal: {e}")
@@ -129,21 +133,25 @@ def create_request_submission(ack, body, say, logger):
         ack()
 
         values_dict = body["view"]["state"]["values"]
-        request_id = list(values_dict.keys())[0].split('_')[-1]
+        request_id = list(values_dict.keys())[0].split("_")[-1]
 
         request_info = {
-            "bonus": values_dict[f"bonus_input_{request_id}"]\
-                ["bonus_input_action"]["value"],
-            "description": values_dict[f"description_input_{request_id}"]\
-                ["description_input_action"]["value"],
+            "bonus": values_dict[f"bonus_input_{request_id}"]["bonus_input_action"][
+                "value"
+            ],
+            "description": values_dict[f"description_input_{request_id}"][
+                "description_input_action"
+            ]["value"],
         }
-        say("A new request has been assigned to you.",
-         channel=create_request(request_info))
+        say(
+            "A new request has been assigned to you.",
+            channel=create_request(request_info),
+        )
     except Exception as e:
         logger.error(f"Error while submitting data: {e}")
 
 
-# a listener of a "edit_request_view" view submission.
+# a listener of an "edit_request_view" view submission.
 # triggered by Submit button of edit_request_modal.
 @app.view("edit_request_view")
 def edit_request_submission(ack, body, logger):
@@ -151,16 +159,17 @@ def edit_request_submission(ack, body, logger):
         ack()
 
         values_dict = body["view"]["state"]["values"]
-        request_id = list(values_dict.keys())[0].split('_')[-1]
+        request_id = list(values_dict.keys())[0].split("_")[-1]
 
         request_info = {
             "request_id": request_id,
-            "bonus": values_dict[f"bonus_input_{request_id}"]\
-                ["bonus_input_action"]["value"],
-            "description": values_dict[f"description_input_{request_id}"]\
-                ["description_input_action"]["value"],
+            "bonus": values_dict[f"bonus_input_{request_id}"]["bonus_input_action"][
+                "value"
+            ],
+            "description": values_dict[f"description_input_{request_id}"][
+                "description_input_action"
+            ]["value"],
         }
-        
         edit_request(request_info)
     except Exception as e:
         logger.error(f"Error while submitting data: {e}")
@@ -174,23 +183,26 @@ def review_request_submission(ack, body, say, logger):
         ack()
 
         values_dict = body["view"]["state"]["values"]
-        request_id = list(values_dict.keys())[0].split('_')[-1]
+        request_id = list(values_dict.keys())[0].split("_")[-1]
 
         request_info = {
             "request_id": request_id,
-            "status": values_dict[f"status_select_{request_id}"]\
-                ["status_select_action"]["selected_option"]["value"],
+            "status": values_dict[f"status_select_{request_id}"][
+                "status_select_action"
+            ]["selected_option"]["value"],
         }
-        
+
         review_request(request_info)
-        say("Your request has been reviewed.",
-         channel=get_request_creator(request_id))
-        
+        say(
+            "Your request has been reviewed.",
+            channel=get_request_creator(request_id),
+        )
+
     except Exception as e:
         logger.error(f"Error while submitting data: {e}")
 
 
-# a listener of a "edit_roles_view" view submission.
+# a listener of an "edit_roles_view" view submission.
 # triggered by Submit button of edit_roles_modal.
 @app.view("edit_roles_view")
 def edit_roles_submission(ack, body, say, logger):
@@ -198,22 +210,23 @@ def edit_roles_submission(ack, body, say, logger):
         ack()
 
         values_dict = body["view"]["state"]["values"]
-        user_id = list(values_dict.keys())[0].split('_')[-1]
+        user_id = list(values_dict.keys())[0].split("_")[-1]
         try:
-            roles = ['worker'].append(values_dict[f"edit_roles_{user_id}"]\
-            ["set_reviewer_role"]["selected_options"][0]["value"])
+            roles = ["worker"].append(
+                values_dict[f"edit_roles_{user_id}"]["set_reviewer_role"][
+                    "selected_options"
+                ][0]["value"]
+            )
         except IndexError:
-            roles = ['worker']
+            roles = ["worker"]
 
         roles_info = {
             "user_id": user_id,
             "roles": roles,
         }
-        
+
         edit_roles(roles_info)
-        say("Your role has been changed.",
-         channel=user_id)
-        
+        say("Your role has been changed.", channel=user_id)
     except Exception as e:
         logger.error(f"Error while submitting data: {e}")
 
@@ -230,16 +243,13 @@ def register_submission(ack, body, client, say, logger):
             "id": body["user"]["id"],
             "email": client.users_profile_get()["email"],
             "login": values_dict["login_input"]["login_input_action"]["value"],
-            "password": values_dict["password_input"]\
-                ["password_input_action"]["value"],
+            "password": values_dict["password_input"]["password_input_action"]["value"],
         }
 
         register(user_info)
         say("You have successfully registered!", channel=body["user"]["id"])
 
-        registered_event = {
-            "user": body["user"]["id"]
-        }
+        registered_event = {"user": body["user"]["id"]}
         publish_home_tab(client, registered_event, logger)
     except Exception as e:
         logger.error(f"Error while submitting data: {e}")
@@ -247,4 +257,4 @@ def register_submission(ack, body, client, say, logger):
 
 # Start your app
 if __name__ == "__main__":
-    app.start(port=int(os.environ.get("PORT", 3000)))
+    app.start(port=int(environ.get("PORT", 3000)))
