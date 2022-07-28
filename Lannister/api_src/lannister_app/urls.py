@@ -3,7 +3,7 @@ from django.urls import path
 from .views import (BonusRequestHistoryList, BonusRequestHistorySingle,
                     BonusRequestList, BonusRequestSingle,
                     ReviewerBonusRequestList, ReviewerList, ReviewerSingle,
-                    UserList, UserSingle, WorkerBonusRequestList, WorkerList,
+                    UserList, UserSingle, UserSlackId, WorkerBonusRequestList, WorkerList,
                     WorkerSingle)
 
 urlpatterns = [
@@ -33,6 +33,7 @@ urlpatterns = [
     ),
     path("users/", UserList.as_view(), name="user-list"),
     path("users/<int:pk>", UserSingle.as_view(), name="user-single"),
+    path("users/slack/<str:slack_id>", UserSlackId.as_view(), name="user-slack-id"),
     path("reviewers/", ReviewerList.as_view(), name="reviewers-list"),
     path("reviewers/<int:pk>", ReviewerSingle.as_view(), name="reviewer-single"),
     path("workers/", WorkerList.as_view(), name="workers-list"),

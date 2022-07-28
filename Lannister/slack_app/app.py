@@ -134,6 +134,7 @@ def create_request_submission(ack, body, say, logger):
         ack()
         values_dict, request_id = get_values(body)
         request_info = {
+            "creator": body["user"]["id"],
             "bonus": values_dict[f"bonus_input_{request_id}"]["bonus_input_action"][
                 "value"
             ],

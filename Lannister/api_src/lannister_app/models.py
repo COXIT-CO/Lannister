@@ -44,6 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(_("username"), max_length=30)
     email = models.EmailField(_("email address"), unique=True)
     roles = ArrayField(models.CharField(_("roles"), max_length=20), default=["worker"])
+    slack_id = models.CharField(_("slack_id"), max_length=15, unique=True, blank=True, null=True)
 
     is_staff = models.BooleanField(
         _("staff status"),

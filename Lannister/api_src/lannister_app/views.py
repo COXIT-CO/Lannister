@@ -36,6 +36,8 @@ def register(request):
     serializer = CreateUserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
+        if request.data["slack_id"]:
+            User.objects.filter(id=request.data["id"]).update(slack_id=request.data["slack_id"])
         success = {
             "message": f"Successfully registered user:" f" [{request.data['username']}]"
         }
@@ -162,3 +164,12 @@ class WorkerSingle(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = User.objects.filter(roles__contains=["worker"])
     serializer_class = GetUserSerializer
+
+
+# returns user id by slack id
+class UserSlackId(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, slack_id):
+        worker_requests = User.objects.filter(slack_id=slack_id).first()
+        return Response(worker_requests.json(), status=status.HTTP_200_OK)
