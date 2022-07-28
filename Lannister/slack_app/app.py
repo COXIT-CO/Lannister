@@ -1,16 +1,10 @@
 from os import environ
 
-# Use the package we installed
 from slack_bolt import App
 
 import views
-from input_services import (
-    create_request,
-    edit_request,
-    edit_roles,
-    register,
-    review_request,
-)
+from input_services import (create_request, edit_request, edit_roles, register,
+                            review_request)
 from output_services import check_user, get_request_creator
 
 # Initializes your app with your bot token and signing secret
@@ -125,14 +119,20 @@ def render_show_history_modal(ack, body, client, logger):
         logger.error(f"Error while opening modal: {e}")
 
 
+# gets necessary values from a view submission
+def get_values(body):
+    values_dict = body["view"]["state"]["values"]
+    element_id = list(values_dict.keys())[0].split("_")[-1]
+    return values_dict, element_id
+
+
 # a listener of a "create_request_view" view submission.
 # triggered by Submit button of create_request_modal.
 @app.view("create_request_view")
 def create_request_submission(ack, body, say, logger):
     try:
         ack()
-        values_dict = body["view"]["state"]["values"]
-        request_id = list(values_dict.keys())[0].split("_")[-1]
+        values_dict, request_id = get_values(body)
         request_info = {
             "bonus": values_dict[f"bonus_input_{request_id}"]["bonus_input_action"][
                 "value"
@@ -155,8 +155,7 @@ def create_request_submission(ack, body, say, logger):
 def edit_request_submission(ack, body, logger):
     try:
         ack()
-        values_dict = body["view"]["state"]["values"]
-        request_id = list(values_dict.keys())[0].split("_")[-1]
+        values_dict, request_id = get_values(body)
         request_info = {
             "request_id": request_id,
             "bonus": values_dict[f"bonus_input_{request_id}"]["bonus_input_action"][
@@ -177,8 +176,7 @@ def edit_request_submission(ack, body, logger):
 def review_request_submission(ack, body, say, logger):
     try:
         ack()
-        values_dict = body["view"]["state"]["values"]
-        request_id = list(values_dict.keys())[0].split("_")[-1]
+        values_dict, request_id = get_values(body)
         request_info = {
             "request_id": request_id,
             "status": values_dict[f"status_select_{request_id}"][
@@ -202,8 +200,7 @@ def review_request_submission(ack, body, say, logger):
 def edit_roles_submission(ack, body, say, logger):
     try:
         ack()
-        values_dict = body["view"]["state"]["values"]
-        user_id = list(values_dict.keys())[0].split("_")[-1]
+        values_dict, user_id = get_values(body)
         try:
             roles = ["worker"].append(
                 values_dict[f"edit_roles_{user_id}"]["set_reviewer_role"][

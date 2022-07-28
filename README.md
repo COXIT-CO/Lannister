@@ -257,7 +257,7 @@ Return:
     400: bad request
     404: file not found 
     500: internal server error  
-    
+
 <hr/>
 
 ### User registration
@@ -268,9 +268,9 @@ The payload MUST contain the following json properties:
 
  *name*: username,
 
- *email*: your work email, 
+ *email*: your work email,
 
- *password*: your account password, 
+ *password*: your account password,
 
 
 Return:
@@ -290,9 +290,9 @@ The payload MUST contain the following json properties:
 
  *creator*: Worker who create the request,
 
- *reviewer*: A person who is assigned to review the request, 
+ *reviewer*: A person who is assigned to review the request,
 
- *bonus_type*: It can be a referral bonus, overtime, etc ,
+ *bonus_type*: It can be a referral bonus, overtime, etc,
 
 *description*: information about the bonus,
 
